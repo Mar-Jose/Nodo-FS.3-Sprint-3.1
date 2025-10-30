@@ -16,7 +16,7 @@ class SuperHeroRepository extends IRepository {
         return await superHero.find({ [atributo]: valor });
     }
     async obtenerMayoresDe30() {
-       // return await superHero.find({edad: { $gt: 30 }, planetaOrigen: "Tierra", $expr: { $eq: [ {$size: { $ifNull: [ "$poderes", [] ]}}, 1 ]} });
+       // return await superHero.find({edad: { $gt: 30 }, planetaOrigen: "Tierra", $expr: { $gt: [ {$size: { $ifNull: [ "$poderes", [] ]}}, 1 ]} });
     const superheroefiltrado= await superHero.find({edad: { $gt: 30 }, planetaOrigen: "Tierra", $expr: { $eq: [ {$size: { $ifNull: [ "$poderes", [] ]}}, 1 ]} });
     console.log ("estoy en la capa persistencia, clase superherorepositorio, función obtener mayores de 30 que devuelve superheroefiltrado " + superheroefiltrado );
     return superheroefiltrado;

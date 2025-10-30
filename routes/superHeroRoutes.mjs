@@ -1,54 +1,26 @@
-import { obtenerSuperHeroePorId, obtenerTodosLosSuperHeroes, buscarSuperHeroePorAtributo, obtenerSuperHeroesMayoresDe30 } from '../services/superheroesService.mjs';
-import { renderizarSuperheroe, renderizarListaSuperheroes } from '../views/responseView.mjs';
-         
-export async function obtenerSuperheroePorIdController(req, res) {
-    try {
-        const { id } = req.params;
-        const superheroe = await obtenerSuperHeroePorId(id);
-        if (!superheroe) {
-            return res.status(404).send({ mensaje: 'Superhéroe no encontrado' });
-        }
+import express from 'express';
+import {
+    obtenerSuperHeroePorIdController,
+    obtenerTodosLosSuperHeroesController,
+    buscarSuperheroesPorAtributoController,
+    obtenerSuperHeroesMayoresDe30Controller,
+    //Requerimientos del sprint 3. tp 1:
+    crearSuperheroeController,
+    actualizarSuperheroeController,
+    eliminarSuperheroexIdController,
+    eliminarSuperheroePorNombreController
+} from '../controllers/superHeroesController.mjs';
 
-        const superheroeFormateado = renderizarSuperheroe(superheroe);
-        return res.status(200).json(superheroeFormateado);
-    } catch (error) {
-        return res.status(500).send ({ mensaje: 'Error al obtener el superhéroe', error: error.message });
-    }
-}
+const router = express.Router();
 
-export async function obtenerTodosLosSuperheroesController(req, res) {
-    try {
-        const superheroes = await obtenerTodosLosSuperHeroes();
-        const superheroesFormateados = renderizarListaSuperheroes(superheroes);
-        return res.status(200).json(superheroesFormateados);
-    } catch (error) {
-        return res.status(500).send({ mensaje: 'Error al obtener los superhéroes', error: error.message });
-    }
-}
-
-export async function buscarSuperheroesPorAtributoController(req, res) {
-    try {
-        const { atributo, valor } = req.params;
-        const superheroes = await buscarSuperHeroePorAtributo(atributo, valor);
-        if (superheroes.length === 0) {
-            return res.status(404).send({ mensaje: 'No se encontraron superhéroes con ese atributo' });
-        }
-
-        const superheroesFormateados = renderizarListaSuperheroes(superheroes);
-            return res.status(200).json(superheroesFormateados);
-    } catch (error) {
-            return res.status(500).send({ mensaje: 'Error al buscar los superhéroes', error: error.message });
-    }
-}
-export async function obtenerSuperHeroesMayoresDe30Controller(req, res) {
-    try {
-        const superheroes = await obtenerSuperHeroesMayoresDe30();
-        if (superheroes.length === 0) {
-            return res.status(404).send({ mensaje: 'No se encontraron superhéroes mayores de 30 años' });
-        }
-        const superheroesFormateados = renderizarListaSuperheroes(superheroes);
-        res.status(200).json(superheroesFormateados);
-    } catch (error) {
-            return res.status(500).send({mensaje: 'Error al obtener superhéroes mayores de 30', error: error.message});
-    }
-}
+router.get('/heroes', obtenerTodosLosSuperHeroesController);
+router.get('/heroes/:id', obtenerSuperHeroePorIdController);
+router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController);
+router.get('/heroes/mayores-30', obtenerSuperHeroesMayoresDe30Controller);
+//Requerimientos del sprint 3. tp 1:
+router.post('/heroes', crearSuperheroeController);
+router.put('/heroes/id/:id', actualizarSuperheroeController);
+router.delete('/heroes/id/:id', eliminarSuperheroexIdController);
+router.delete('/heroes/nombre/:nombre', eliminarSuperheroePorNombreController);
+                               
+export default router;

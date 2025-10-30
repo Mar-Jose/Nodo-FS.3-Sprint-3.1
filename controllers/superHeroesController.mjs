@@ -1,7 +1,8 @@
-import { obtenerSuperHeroePorId, obtenerTodosLosSuperHeroes, buscarSuperHeroePorAtributo, obtenerSuperHeroesMayoresDe30 } from '../services/superheroesService.mjs';
+import { obtenerSuperHeroePorId, obtenerTodosLosSuperHeroes, buscarSuperHeroePorAtributo, obtenerSuperHeroesMayoresDe30 } from '../services/superheroesServices.mjs';
 import { renderizarSuperheroe, renderizarListaSuperheroes } from '../views/responseView.mjs';
-         
-export async function obtenerSuperheroePorIdController(req, res) {
+                                                            
+
+export async function obtenerSuperHeroePorIdController(req, res) {
     try {
         const { id } = req.params;
         const superheroe = await obtenerSuperHeroePorId(id);
@@ -15,8 +16,7 @@ export async function obtenerSuperheroePorIdController(req, res) {
         return res.status(500).send ({ mensaje: 'Error al obtener el superhéroe', error: error.message });
     }
 }
-
-export async function obtenerTodosLosSuperheroesController(req, res) {
+export async function obtenerTodosLosSuperHeroesController(req, res) {
     try {
         const superheroes = await obtenerTodosLosSuperHeroes();
         const superheroesFormateados = renderizarListaSuperheroes(superheroes);
@@ -29,17 +29,17 @@ export async function obtenerTodosLosSuperheroesController(req, res) {
 export async function buscarSuperheroesPorAtributoController(req, res) {
     try {
         const { atributo, valor } = req.params;
-        const superheroes = await buscarSuperHeroePorAtributo(atributo, valor);
+        const superheroes = await  buscarSuperHeroePorAtributo(atributo, valor);
         if (superheroes.length === 0) {
             return res.status(404).send({ mensaje: 'No se encontraron superhéroes con ese atributo' });
-        }
-
+        }                          
         const superheroesFormateados = renderizarListaSuperheroes(superheroes);
             return res.status(200).json(superheroesFormateados);
     } catch (error) {
             return res.status(500).send({ mensaje: 'Error al buscar los superhéroes', error: error.message });
     }
 }
+
 export async function obtenerSuperHeroesMayoresDe30Controller(req, res) {
     try {
         const superheroes = await obtenerSuperHeroesMayoresDe30();
