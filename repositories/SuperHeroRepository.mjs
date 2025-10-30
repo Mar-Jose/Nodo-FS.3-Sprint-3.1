@@ -22,5 +22,24 @@ class SuperHeroRepository extends IRepository {
     return superheroefiltrado;
     // eq: igual. lt= menos que. gt: mayor que. gte=mayor o igual que. 
     }
+
+    // sprint 3. tp 1.
+    async crearHeroe (valor) {
+    const nuevo = new SuperHero(valor);
+    return await nuevo.save();
+  }
+
+  async actualizarHeroe (id, valor) {
+    return await SuperHero.findByIdAndUpdate(id, valor, { new: true });
+   
+  }
+
+  async eliminarHeroexId(id) {
+    return await SuperHero.findByIdAndDelete(id);
+  }
+
+  async eliminarHeroexNombre(nombre) {
+    return await SuperHero.findOneAndDelete({ nombreSuperheroe: nombre });
+  }
 }
 export default new SuperHeroRepository;

@@ -16,6 +16,23 @@ class IRepository {
     {
         throw new Error ("Metodo 'obtenerMayoresDe30()' no implementado");
     }
+    // sprint 3.tp 1.
+      crearHeroe(valor)
+    {
+        throw new Error ("Metodo 'crear()' no implementado");
+    }
+    actualizarHeroe(id, valor)
+    {
+        throw new Error ("Metodo 'actualizarHeroe()' no implementado");
+    }
+    eliminarHeroexId(id)
+    {
+        throw new Error ("Metodo 'eliminarHeroePorId()' no implementado");
+    }
+    eliminarHeroexNombre(nombre)
+    {
+        throw new Error ("Metodo 'eliminarHeroePorNombre()' no implementado");
+    }
 }
 
 export default IRepository;
