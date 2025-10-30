@@ -15,3 +15,23 @@ export async function buscarSuperHeroePorAtributo(atributo, valor) {
 export async function obtenerSuperHeroesMayoresDe30() {
     return await SuperHeroRepository.obtenerMayoresDe30();
 }
+
+// sprint 3. tp1.
+export async function crearSuperHeroes(valor) {
+    return await SuperHeroeRepository.crearHeroe(valor);
+}
+
+
+export async function actualizarSuperHeroes(id, valor) {
+    return await SuperHeroeRepository.actualizarHeroe(id, valor);
+}
+
+
+export async function eliminarSuperHeroesxId(id) {
+    return await SuperHeroeRepository.eliminarHeroexId(id);
+}
+
+
+export async function eliminarSuperHeroesxNombre(nombre) {
+    return await SuperHeroeRepository.eliminarHeroexNombre(nombre);
+}
