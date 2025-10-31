@@ -1,6 +1,6 @@
 //Implementa acceso real a mongoDB
 
-import superHero from "../models/superHero.mjs";
+import superHero from "../models/SuperHero.mjs";
 import IRepository from "./IRepository.mjs";
 
 class SuperHeroRepository extends IRepository {
@@ -25,21 +25,25 @@ class SuperHeroRepository extends IRepository {
 
     // sprint 3. tp 1.
     async crearHeroe (valor) {
-    const nuevo = new SuperHero(valor);
+    const nuevo = new superHero(valor);
+     console.log("estoy capa Repo-f-crear");
     return await nuevo.save();
   }
 
   async actualizarHeroe (id, valor) {
-    return await SuperHero.findByIdAndUpdate(id, valor, { new: true });
+     console.log("estoy capa Repo-f-actualizar");
+    return await superHero.findByIdAndUpdate(id, valor, { new: true });
    
   }
 
   async eliminarHeroexId(id) {
-    return await SuperHero.findByIdAndDelete(id);
+    console.log("estoy capa Repo-f-eliminar x id");
+    return await superHero.findByIdAndDelete(id);
   }
 
   async eliminarHeroexNombre(nombre) {
-    return await SuperHero.findOneAndDelete({ nombreSuperheroe: nombre });
+    console.log("estoy capa Repo-f-elimina x nombre");
+    return await superHero.findOneAndDelete({ nombreSuperHeroe: nombre });
   }
 }
 export default new SuperHeroRepository;

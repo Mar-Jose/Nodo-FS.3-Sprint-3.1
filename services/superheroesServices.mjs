@@ -17,21 +17,25 @@ export async function obtenerSuperHeroesMayoresDe30() {
 }
 
 // sprint 3. tp1.
-export async function crearSuperHeroes(valor) {
-    return await SuperHeroeRepository.crearHeroe(valor);
+export async function crearSuperHeroe(valor) {
+    console.log("estoy capa Services-crear");
+    return await SuperHeroRepository.crearHeroe(valor);
 }
 
 
-export async function actualizarSuperHeroes(id, valor) {
-    return await SuperHeroeRepository.actualizarHeroe(id, valor);
+export async function actualizarSuperHeroe(id, valor) {
+     console.log("estoy capa Services-f-actualizar");
+    return await SuperHeroRepository.actualizarHeroe(id, valor);
 }
 
 
-export async function eliminarSuperHeroesxId(id) {
-    return await SuperHeroeRepository.eliminarHeroexId(id);
+export async function eliminarSuperHeroexId(id) {
+     console.log("estoy capa Services-f-eliminar x id");
+    return await SuperHeroRepository.eliminarHeroexId(id);
 }
 
 
-export async function eliminarSuperHeroesxNombre(nombre) {
-    return await SuperHeroeRepository.eliminarHeroexNombre(nombre);
+export async function eliminarSuperHeroexNombre(nombre) {
+     console.log("estoy capa Services-f-eleminar x nombre");
+    return await SuperHeroRepository.eliminarHeroexNombre(nombre);
 }
